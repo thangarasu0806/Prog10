@@ -1,23 +1,41 @@
-create table department100(
-departmentID int,
-departmentname varchar(30)
+CREATE DATABASE IF NOT EXISTS CollegeDB;
+USE CollegeDB;
+
+CREATE TABLE Department (
+    department_id INT PRIMARY KEY,
+    department_name VARCHAR(100)
 );
-INSERT INTO department100 VALUES
-(101,'COMPUTER SCIENCE'),
-(102,'MATHEMATICS'),
-(103,'PHYSICS');
-CREATE TABLE student100(
-studentID INT,
-studentname VARCHAR(20),
-departmentID int
+
+CREATE TABLE Student (
+    student_id INT PRIMARY KEY,
+    student_name VARCHAR(100),
+    department_id INT
 );
-insert into student100 values
-(1001,'arun',101),
-(1002,'diviya',102),
-(1003,'karthik',101),
-(1004,'nisha',103);
-SELECT student100.studentname,
-department100.departmentname
-from student100
-inner join department100
-on student100.departmentID=department100.departmentID;
+
+INSERT INTO Department (department_id, department_name) VALUES
+(1, 'Computer Science'),
+(2, 'Information Technology'),
+(3, 'Electronics');
+
+INSERT INTO Student (student_id, student_name, department_id) VALUES
+(101, 'John', 1),
+(102, 'David', 2),
+(103, 'Sam', NULL);
+
+-- LEFT JOIN
+SELECT
+    Student.student_id,
+    Student.student_name,
+    Department.department_name
+FROM Student
+LEFT JOIN Department
+ON Student.department_id = Department.department_id;
+
+-- RIGHT JOIN
+SELECT
+    Student.student_id,
+    Student.student_name,
+    Department.department_name
+FROM Student
+RIGHT JOIN Department
+ON Student.department_id = Department.department_id;
